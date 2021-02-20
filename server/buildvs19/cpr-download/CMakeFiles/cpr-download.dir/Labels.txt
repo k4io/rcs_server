@@ -1,0 +1,13 @@
+# Target labels
+ cpr-download
+# Source files and their labels
+C:/Users/kai/source/repos/server/server/buildvs19/cpr-download/CMakeFiles/cpr-download
+C:/Users/kai/source/repos/server/server/buildvs19/cpr-download/CMakeFiles/a97d976a2fa6bcd0d104a05008497c81/cpr-download.rule
+C:/Users/kai/source/repos/server/server/buildvs19/cpr-download/CMakeFiles/178bc09b6af0ac55854379a643e43887/cpr-download-complete.rule
+C:/Users/kai/source/repos/server/server/buildvs19/cpr-download/CMakeFiles/7233a50024fc9ea28b88dfb80a095631/cpr-download-build.rule
+C:/Users/kai/source/repos/server/server/buildvs19/cpr-download/CMakeFiles/7233a50024fc9ea28b88dfb80a095631/cpr-download-configure.rule
+C:/Users/kai/source/repos/server/server/buildvs19/cpr-download/CMakeFiles/7233a50024fc9ea28b88dfb80a095631/cpr-download-download.rule
+C:/Users/kai/source/repos/server/server/buildvs19/cpr-download/CMakeFiles/7233a50024fc9ea28b88dfb80a095631/cpr-download-install.rule
+C:/Users/kai/source/repos/server/server/buildvs19/cpr-download/CMakeFiles/7233a50024fc9ea28b88dfb80a095631/cpr-download-mkdir.rule
+C:/Users/kai/source/repos/server/server/buildvs19/cpr-download/CMakeFiles/7233a50024fc9ea28b88dfb80a095631/cpr-download-patch.rule
+C:/Users/kai/source/repos/server/server/buildvs19/cpr-download/CMakeFiles/7233a50024fc9ea28b88dfb80a095631/cpr-download-test.rule

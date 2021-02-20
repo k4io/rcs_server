@@ -1,3 +1,0 @@
-C:/Users/kai/source/repos/server/server/build/websocketpp-download/CMakeFiles/websocketpp-download.dir
-C:/Users/kai/source/repos/server/server/build/websocketpp-download/CMakeFiles/ALL_BUILD.dir
-C:/Users/kai/source/repos/server/server/build/websocketpp-download/CMakeFiles/ZERO_CHECK.dir

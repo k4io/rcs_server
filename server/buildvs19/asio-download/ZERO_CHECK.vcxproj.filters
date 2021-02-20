@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\buildvs19\asio-download\CMakeFiles\4c45544b98c55ab51926d6051b1301d7\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B544E674-C7A5-3837-A3F0-4ED06813D38C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -90,6 +90,8 @@ int orderchecker::start()
         return 1;
     }
 
+    //
+
     // Accept a client socket
     ClientSocket = accept(ListenSocket, NULL, NULL);
     if (ClientSocket == INVALID_SOCKET) {
@@ -115,16 +117,24 @@ int orderchecker::start()
             std::vector<std::string> orderinfo = db.explode(s, '|');
 
             int al = 0;
-            if (orderinfo[1] == "luRxb1O" || orderinfo[1] == "DgwYwTA")
+            if (orderinfo[1] == "luRxb1O")
+                al = 4;
+            else if (orderinfo[1] == "DgwYwTA")
                 al = 2;
-            else if (orderinfo[1] == "FpXpTjP" || orderinfo[1] == "pa0OUmb")
+            else if (orderinfo[1] == "FpXpTjP")
+                al = 3;
+            else if (orderinfo[1] == "pa0OUmb")
                 al = 1;
+
+            int i = 0;
+            if (orderinfo[3] != "null")
+                i = 1;
 
             Order _o = {
                 orderinfo[0],
                 orderinfo[2],
                 al,
-                orderinfo[3]
+                i
             };
 
             if (!db.doesOrderExist(_o.order_id))
@@ -146,5 +156,66 @@ int orderchecker::start()
 }
 void orderchecker::stop()
 {
+
+}
+
+accountchecker::accountchecker() {
+
+}
+
+accountchecker::~accountchecker() {
+
+}
+
+void accountchecker::start() {
+    while (true)
+    {
+        manager db;
+        std::vector<std::string> v(db.explode(db.getAllUids(), '\n'));
+        for (auto a : v)
+        {
+            int id = stoi(a);
+
+            std::string timeindb = db.getSubEndDate(id);
+            if (timeindb == "\n")
+                continue;
+
+            timeindb = db.explode(timeindb, ' ')[0];
+
+            struct tm tm;
+
+            time_t start;
+            int yy, month, dd, hh, mm, ss;
+            const char* zstart = timeindb.c_str();
+
+            sscanf(zstart, "%d-%d-%d", &yy, &month, &dd);
+
+
+            tm.tm_year = yy - 1900;
+            tm.tm_mon = month - 1;
+            tm.tm_mday = dd;
+            tm.tm_isdst = -1;
+
+            time_t now = time(0);
+
+            start = mktime(&tm);
+
+            if (start < now)
+            {
+                 db.expiredUser(id);
+            }
+
+            //printf("\n%o: %o/%o/%o\n", id, tm.tm_year, tm.tm_mon, tm.tm_mday);
+            //printf("\n%o: %o/%o/%o\n", id, yy, month, dd);
+
+            //scanf("%d/%d/%d", &d, &m, &y);
+        }
+
+        SleepEx(600000, false);
+    }
+
+}
+
+void accountchecker::stop() {
 
 }

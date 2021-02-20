@@ -16,20 +16,27 @@
 #include <winsock2.h>
 #include <chrono>
 #include <ctime>
+#include <Wincrypt.h>
+#include <iomanip>
+#include <sstream>
+#include <time.h>
+#include "md5.h"
 
 #define DEFAULT_BUFLEN 128
 #define DEFAULT_ORDER_PORT "51001"
 #define DEFAULT_CLIENT_PORT "51005"
-#define DBINTERROR -69
-
-//Local includes
-//#include "discordbot.h"
+#define DBINTERROR -1
 
 struct Order
 {
 	std::string order_id;
 	std::string order_date;
 	int accessLevel;
-	std::string order_paid_for;
+	int order_paid_for;
 	int uid;
+};
+
+enum HashType
+{
+    HashSha1, HashMd5, HashSha256
 };

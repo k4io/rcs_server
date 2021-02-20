@@ -20,6 +20,12 @@ void runbot()
 	bot.run();
 }
 
+void checkAccounts()
+{
+	accountchecker ac;
+	ac.start();
+}
+
 int main()
 {
 #ifdef __linux__
@@ -38,8 +44,6 @@ int main()
 	exit(0);
 #endif
 
-
-
 	printf("<$> Initializing modules: Discord, Database handler, Client handler, Server input handler\n");
 	std::thread botThread(runbot);
 	botThread.detach();
@@ -55,6 +59,10 @@ int main()
 	//order checkin
 	std::thread orderThread(getOrders);
 	orderThread.detach();
+
+	//account checkin
+	std::thread accThread(checkAccounts);
+	accThread.detach();
 
 	for (;;) SleepEx(1,false);
 }

@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/buildvs19/websocketpp-download/CMakeFiles/websocketpp-download"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/buildvs19/websocketpp-download/CMakeFiles/167d0d765516a0c0d8c8267dc2d985f7/websocketpp-download.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/buildvs19/websocketpp-download/CMakeFiles/751dada8f8d47f8f3714512881333393/websocketpp-download-complete.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/buildvs19/websocketpp-download/CMakeFiles/0df152554847688fd20b7e5560c2c60b/websocketpp-download-build.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/buildvs19/websocketpp-download/CMakeFiles/0df152554847688fd20b7e5560c2c60b/websocketpp-download-configure.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/buildvs19/websocketpp-download/CMakeFiles/0df152554847688fd20b7e5560c2c60b/websocketpp-download-download.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/buildvs19/websocketpp-download/CMakeFiles/0df152554847688fd20b7e5560c2c60b/websocketpp-download-install.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/buildvs19/websocketpp-download/CMakeFiles/0df152554847688fd20b7e5560c2c60b/websocketpp-download-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/buildvs19/websocketpp-download/CMakeFiles/0df152554847688fd20b7e5560c2c60b/websocketpp-download-patch.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/buildvs19/websocketpp-download/CMakeFiles/0df152554847688fd20b7e5560c2c60b/websocketpp-download-test.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"websocketpp-download"
+		],
+		"name" : "websocketpp-download"
+	}
+}

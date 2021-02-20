@@ -1,0 +1,10 @@
+^C:\USERS\KAI\SOURCE\REPOS\SERVER\SERVER\DEPS\SLEEPY-DISCORD\DEPS\CPR\CPR\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/kai/source/repos/server/server -BC:/Users/kai/source/repos/server/server/buildvs19 --check-stamp-file C:/Users/kai/source/repos/server/server/buildvs19/deps/sleepy-discord/deps/cpr/cpr/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\buildvs19\websocketpp-download\CMakeFiles\167d0d765516a0c0d8c8267dc2d985f7\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F69A81D7-A1E8-3BFB-8339-B192047D9DFE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

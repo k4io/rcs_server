@@ -1,0 +1,3 @@
+C:/Users/kai/source/repos/server/server/buildvs19/cpr-download/CMakeFiles/cpr-download.dir
+C:/Users/kai/source/repos/server/server/buildvs19/cpr-download/CMakeFiles/ALL_BUILD.dir
+C:/Users/kai/source/repos/server/server/buildvs19/cpr-download/CMakeFiles/ZERO_CHECK.dir
