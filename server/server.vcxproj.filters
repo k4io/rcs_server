@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Discord bot">
+      <UniqueIdentifier>{dc7e7110-42b5-41b9-bcce-a409662be4c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Database manager">
+      <UniqueIdentifier>{bc2f4155-4785-417c-b4d0-0edd423582c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client handler">
+      <UniqueIdentifier>{c063950a-5266-497e-bc0f-cbed52b5a1c5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="discordbot.cpp">
+      <Filter>Discord bot</Filter>
+    </ClCompile>
+    <ClCompile Include="dbmanager.cpp">
+      <Filter>Database manager</Filter>
+    </ClCompile>
+    <ClCompile Include="clienthandler.cpp">
+      <Filter>Client handler</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="includes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="discordbot.h">
+      <Filter>Discord bot</Filter>
+    </ClInclude>
+    <ClInclude Include="dbmanager.h">
+      <Filter>Database manager</Filter>
+    </ClInclude>
+    <ClInclude Include="clienthandler.h">
+      <Filter>Client handler</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

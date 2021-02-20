@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{42A8C406-D5C9-325F-A18A-2E2E3F480E36}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>server</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\kai\source\repos\server\server\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">server.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">server</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\kai\source\repos\server\server\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">server.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">server</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\kai\source\repos\server\server\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">server.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">server</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\kai\source\repos\server\server\deps\sleepy-discord\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\asio\asio\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\websocketpp;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\opt\curl\include;C:\Users\kai\source\repos\server\server\build\deps\sleepy-discord\deps\cpr\opt\curl\include\curl;C:\Program Files\OpenSSL-Win64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;SLEEPY_DISCORD_CMAKE;EXISTENT_CPR;EXISTENT_ASIO;EXISTENT_WEBSOCKETPP;NONEXISTENT_UWEBSOCKETS;NONEXISTENT_OPUS;NONEXISTENT_SODIUM;CURL_STATICLIB;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;SLEEPY_DISCORD_CMAKE;EXISTENT_CPR;EXISTENT_ASIO;EXISTENT_WEBSOCKETPP;NONEXISTENT_UWEBSOCKETS;NONEXISTENT_OPUS;NONEXISTENT_SODIUM;CURL_STATICLIB;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\kai\source\repos\server\server\deps\sleepy-discord\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\asio\asio\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\websocketpp;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\opt\curl\include;C:\Users\kai\source\repos\server\server\build\deps\sleepy-discord\deps\cpr\opt\curl\include\curl;C:\Program Files\OpenSSL-Win64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\kai\source\repos\server\server\deps\sleepy-discord\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\asio\asio\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\websocketpp;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\opt\curl\include;C:\Users\kai\source\repos\server\server\build\deps\sleepy-discord\deps\cpr\opt\curl\include\curl;C:\Program Files\OpenSSL-Win64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>deps\sleepy-discord\sleepy_discord\Release\sleepy-discord.lib;lib\Release\cpr.lib;lib\Release\libcurl.lib;wldap32.lib;winmm.lib;ws2_32.lib;crypt32.lib;C:\Program Files\OpenSSL-Win64\lib\VC\libssl64MD.lib;C:\Program Files\OpenSSL-Win64\lib\VC\libcrypto64MD.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/kai/source/repos/server/server/build/Release/server.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/kai/source/repos/server/server/build/Release/server.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\kai\source\repos\server\server\deps\sleepy-discord\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\asio\asio\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\websocketpp;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\opt\curl\include;C:\Users\kai\source\repos\server\server\build\deps\sleepy-discord\deps\cpr\opt\curl\include\curl;C:\Program Files\OpenSSL-Win64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;SLEEPY_DISCORD_CMAKE;EXISTENT_CPR;EXISTENT_ASIO;EXISTENT_WEBSOCKETPP;NONEXISTENT_UWEBSOCKETS;NONEXISTENT_OPUS;NONEXISTENT_SODIUM;CURL_STATICLIB;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;SLEEPY_DISCORD_CMAKE;EXISTENT_CPR;EXISTENT_ASIO;EXISTENT_WEBSOCKETPP;NONEXISTENT_UWEBSOCKETS;NONEXISTENT_OPUS;NONEXISTENT_SODIUM;CURL_STATICLIB;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\kai\source\repos\server\server\deps\sleepy-discord\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\asio\asio\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\websocketpp;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\opt\curl\include;C:\Users\kai\source\repos\server\server\build\deps\sleepy-discord\deps\cpr\opt\curl\include\curl;C:\Program Files\OpenSSL-Win64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\kai\source\repos\server\server\deps\sleepy-discord\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\asio\asio\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\websocketpp;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\opt\curl\include;C:\Users\kai\source\repos\server\server\build\deps\sleepy-discord\deps\cpr\opt\curl\include\curl;C:\Program Files\OpenSSL-Win64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>deps\sleepy-discord\sleepy_discord\RelWithDebInfo\sleepy-discord.lib;lib\RelWithDebInfo\cpr.lib;lib\RelWithDebInfo\libcurl.lib;wldap32.lib;winmm.lib;ws2_32.lib;crypt32.lib;C:\Program Files\OpenSSL-Win64\lib\VC\libssl64MD.lib;C:\Program Files\OpenSSL-Win64\lib\VC\libcrypto64MD.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/kai/source/repos/server/server/build/RelWithDebInfo/server.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/kai/source/repos/server/server/build/RelWithDebInfo/server.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\kai\source\repos\server\server\deps\sleepy-discord\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\asio\asio\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\websocketpp;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\opt\curl\include;C:\Users\kai\source\repos\server\server\build\deps\sleepy-discord\deps\cpr\opt\curl\include\curl;C:\Program Files\OpenSSL-Win64\include;C:\Program Files\MySQL\MySQL Connector C++ 8.0\include\jdbc;C:\Program Files\MySQL\MySQL Connector C++ 8.0\include\mysql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;SLEEPY_DISCORD_CMAKE;EXISTENT_CPR;EXISTENT_ASIO;EXISTENT_WEBSOCKETPP;NONEXISTENT_UWEBSOCKETS;NONEXISTENT_OPUS;NONEXISTENT_SODIUM;CURL_STATICLIB;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;SLEEPY_DISCORD_CMAKE;EXISTENT_CPR;EXISTENT_ASIO;EXISTENT_WEBSOCKETPP;NONEXISTENT_UWEBSOCKETS;NONEXISTENT_OPUS;NONEXISTENT_SODIUM;CURL_STATICLIB;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\kai\source\repos\server\server\deps\sleepy-discord\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\asio\asio\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\websocketpp;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\opt\curl\include;C:\Users\kai\source\repos\server\server\build\deps\sleepy-discord\deps\cpr\opt\curl\include\curl;C:\Program Files\OpenSSL-Win64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\kai\source\repos\server\server\deps\sleepy-discord\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\asio\asio\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\websocketpp;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\opt\curl\include;C:\Users\kai\source\repos\server\server\build\deps\sleepy-discord\deps\cpr\opt\curl\include\curl;C:\Program Files\OpenSSL-Win64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>deps\sleepy-discord\sleepy_discord\Debug\sleepy-discord-d.lib;lib\Debug\cpr-d.lib;lib\Debug\libcurl-d.lib;wldap32.lib;winmm.lib;ws2_32.lib;crypt32.lib;C:\Program Files\OpenSSL-Win64\lib\VC\libssl64MDd.lib;C:\Program Files\OpenSSL-Win64\lib\VC\libcrypto64MDd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;libssl.lib;libcrypto.lib;mysqlcppconn.lib;mysqlcppconn8.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files\MySQL\MySQL Connector C++ 8.0\lib64\vs14;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/kai/source/repos/server/server/build/Debug/server.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/kai/source/repos/server/server/build/Debug/server.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\CMakeLists.txt">
+      <StdOutEncoding>UTF-8</StdOutEncoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/kai/source/repos/server/server/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/kai/source/repos/server/server -BC:/Users/kai/source/repos/server/server/build --check-stamp-file C:/Users/kai/source/repos/server/server/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake;C:\Users\kai\source\repos\server\server\build\CMakeFiles\3.20.0-rc1\CMakeCCompiler.cmake;C:\Users\kai\source\repos\server\server\build\CMakeFiles\3.20.0-rc1\CMakeCXXCompiler.cmake;C:\Users\kai\source\repos\server\server\build\CMakeFiles\3.20.0-rc1\CMakeRCCompiler.cmake;C:\Users\kai\source\repos\server\server\build\CMakeFiles\3.20.0-rc1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\kai\source\repos\server\server\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/kai/source/repos/server/server/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/kai/source/repos/server/server -BC:/Users/kai/source/repos/server/server/build --check-stamp-file C:/Users/kai/source/repos/server/server/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake;C:\Users\kai\source\repos\server\server\build\CMakeFiles\3.20.0-rc1\CMakeCCompiler.cmake;C:\Users\kai\source\repos\server\server\build\CMakeFiles\3.20.0-rc1\CMakeCXXCompiler.cmake;C:\Users\kai\source\repos\server\server\build\CMakeFiles\3.20.0-rc1\CMakeRCCompiler.cmake;C:\Users\kai\source\repos\server\server\build\CMakeFiles\3.20.0-rc1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\kai\source\repos\server\server\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/kai/source/repos/server/server/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/kai/source/repos/server/server -BC:/Users/kai/source/repos/server/server/build --check-stamp-file C:/Users/kai/source/repos/server/server/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake;C:\Users\kai\source\repos\server\server\build\CMakeFiles\3.20.0-rc1\CMakeCCompiler.cmake;C:\Users\kai\source\repos\server\server\build\CMakeFiles\3.20.0-rc1\CMakeCXXCompiler.cmake;C:\Users\kai\source\repos\server\server\build\CMakeFiles\3.20.0-rc1\CMakeRCCompiler.cmake;C:\Users\kai\source\repos\server\server\build\CMakeFiles\3.20.0-rc1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\kai\source\repos\server\server\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\kai\source\repos\server\server\server.cpp" />
+    <ClCompile Include="C:\Users\kai\source\repos\server\server\clienthandler.cpp" />
+    <ClInclude Include="C:\Users\kai\source\repos\server\server\clienthandler.h" />
+    <ClCompile Include="C:\Users\kai\source\repos\server\server\dbmanager.cpp" />
+    <ClInclude Include="C:\Users\kai\source\repos\server\server\dbmanager.h" />
+    <ClCompile Include="C:\Users\kai\source\repos\server\server\discordbot.cpp" />
+    <ClInclude Include="C:\Users\kai\source\repos\server\server\discordbot.h" />
+    <ClInclude Include="C:\Users\kai\source\repos\server\server\includes.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\kai\source\repos\server\server\build\ZERO_CHECK.vcxproj">
+      <Project>{6F0AD984-A8DA-3662-8A55-7F43BD5F3F91}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\kai\source\repos\server\server\build\deps\sleepy-discord\deps\cpr\cpr\cpr.vcxproj">
+      <Project>{6E9E5F5B-1337-388F-9086-5FC52A2C761B}</Project>
+      <Name>cpr</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\kai\source\repos\server\server\build\deps\sleepy-discord\deps\cpr\opt\curl\lib\libcurl.vcxproj">
+      <Project>{EB10C228-46D5-3E89-B7BD-122D97503FDC}</Project>
+      <Name>libcurl</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\kai\source\repos\server\server\build\deps\sleepy-discord\sleepy_discord\sleepy-discord.vcxproj">
+      <Project>{B420271C-26ED-31B1-9140-D4FDFF07FDD6}</Project>
+      <Name>sleepy-discord</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

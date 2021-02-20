@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\websocketpp-download\CMakeFiles\cf261e924e5b80224a7eb2ba64f2b6ea\websocketpp-download-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\websocketpp-download\CMakeFiles\cf261e924e5b80224a7eb2ba64f2b6ea\websocketpp-download-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\websocketpp-download\CMakeFiles\cf261e924e5b80224a7eb2ba64f2b6ea\websocketpp-download-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\websocketpp-download\CMakeFiles\cf261e924e5b80224a7eb2ba64f2b6ea\websocketpp-download-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\websocketpp-download\CMakeFiles\cf261e924e5b80224a7eb2ba64f2b6ea\websocketpp-download-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\websocketpp-download\CMakeFiles\cf261e924e5b80224a7eb2ba64f2b6ea\websocketpp-download-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\websocketpp-download\CMakeFiles\cf261e924e5b80224a7eb2ba64f2b6ea\websocketpp-download-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\websocketpp-download\CMakeFiles\ed12df00e8f1cdb2e73836be1e2a1ff0\websocketpp-download-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\websocketpp-download\CMakeFiles\fcf8e21222a6b58412c258ce433432c8\websocketpp-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\websocketpp-download\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\kai\source\repos\server\server\build\websocketpp-download\CMakeFiles\websocketpp-download" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{AF479166-E009-3F91-BEC7-E00BE24C019A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

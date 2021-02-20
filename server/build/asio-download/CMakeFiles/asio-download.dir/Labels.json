@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/asio-download/CMakeFiles/asio-download"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/asio-download/CMakeFiles/fca97de39c55d0ab1c812ece364182e1/asio-download.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/asio-download/CMakeFiles/389039d81b7f077620f27a66d6ffa0d4/asio-download-complete.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/asio-download/CMakeFiles/89dac5dc5e976be1609dfb8847365f83/asio-download-build.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/asio-download/CMakeFiles/89dac5dc5e976be1609dfb8847365f83/asio-download-configure.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/asio-download/CMakeFiles/89dac5dc5e976be1609dfb8847365f83/asio-download-download.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/asio-download/CMakeFiles/89dac5dc5e976be1609dfb8847365f83/asio-download-install.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/asio-download/CMakeFiles/89dac5dc5e976be1609dfb8847365f83/asio-download-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/asio-download/CMakeFiles/89dac5dc5e976be1609dfb8847365f83/asio-download-patch.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/asio-download/CMakeFiles/89dac5dc5e976be1609dfb8847365f83/asio-download-test.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"asio-download"
+		],
+		"name" : "asio-download"
+	}
+}

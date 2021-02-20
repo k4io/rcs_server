@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/cpr-download/CMakeFiles/cpr-download"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/cpr-download/CMakeFiles/763e2930f6a7b178262b87f32e1163c1/cpr-download.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/cpr-download/CMakeFiles/d2f566790249bfee4ae08e01ec0074fa/cpr-download-complete.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/cpr-download/CMakeFiles/8ffa9ca369ec02413301ad8db43e63c3/cpr-download-build.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/cpr-download/CMakeFiles/8ffa9ca369ec02413301ad8db43e63c3/cpr-download-configure.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/cpr-download/CMakeFiles/8ffa9ca369ec02413301ad8db43e63c3/cpr-download-download.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/cpr-download/CMakeFiles/8ffa9ca369ec02413301ad8db43e63c3/cpr-download-install.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/cpr-download/CMakeFiles/8ffa9ca369ec02413301ad8db43e63c3/cpr-download-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/cpr-download/CMakeFiles/8ffa9ca369ec02413301ad8db43e63c3/cpr-download-patch.rule"
+		},
+		{
+			"file" : "C:/Users/kai/source/repos/server/server/build/cpr-download/CMakeFiles/8ffa9ca369ec02413301ad8db43e63c3/cpr-download-test.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"cpr-download"
+		],
+		"name" : "cpr-download"
+	}
+}

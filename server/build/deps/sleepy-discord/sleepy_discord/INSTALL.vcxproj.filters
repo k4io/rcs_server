@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\CMakeFiles\c3a61f1c5b0f5fdce408f2c2e1922c83\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{57B53358-E9D9-35DD-BB60-53808734CF3D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

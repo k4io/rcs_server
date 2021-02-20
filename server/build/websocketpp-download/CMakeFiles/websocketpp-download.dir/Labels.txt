@@ -1,0 +1,13 @@
+# Target labels
+ websocketpp-download
+# Source files and their labels
+C:/Users/kai/source/repos/server/server/build/websocketpp-download/CMakeFiles/websocketpp-download
+C:/Users/kai/source/repos/server/server/build/websocketpp-download/CMakeFiles/fcf8e21222a6b58412c258ce433432c8/websocketpp-download.rule
+C:/Users/kai/source/repos/server/server/build/websocketpp-download/CMakeFiles/ed12df00e8f1cdb2e73836be1e2a1ff0/websocketpp-download-complete.rule
+C:/Users/kai/source/repos/server/server/build/websocketpp-download/CMakeFiles/cf261e924e5b80224a7eb2ba64f2b6ea/websocketpp-download-build.rule
+C:/Users/kai/source/repos/server/server/build/websocketpp-download/CMakeFiles/cf261e924e5b80224a7eb2ba64f2b6ea/websocketpp-download-configure.rule
+C:/Users/kai/source/repos/server/server/build/websocketpp-download/CMakeFiles/cf261e924e5b80224a7eb2ba64f2b6ea/websocketpp-download-download.rule
+C:/Users/kai/source/repos/server/server/build/websocketpp-download/CMakeFiles/cf261e924e5b80224a7eb2ba64f2b6ea/websocketpp-download-install.rule
+C:/Users/kai/source/repos/server/server/build/websocketpp-download/CMakeFiles/cf261e924e5b80224a7eb2ba64f2b6ea/websocketpp-download-mkdir.rule
+C:/Users/kai/source/repos/server/server/build/websocketpp-download/CMakeFiles/cf261e924e5b80224a7eb2ba64f2b6ea/websocketpp-download-patch.rule
+C:/Users/kai/source/repos/server/server/build/websocketpp-download/CMakeFiles/cf261e924e5b80224a7eb2ba64f2b6ea/websocketpp-download-test.rule

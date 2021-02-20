@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\cpr-download\CMakeFiles\8ffa9ca369ec02413301ad8db43e63c3\cpr-download-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\cpr-download\CMakeFiles\8ffa9ca369ec02413301ad8db43e63c3\cpr-download-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\cpr-download\CMakeFiles\8ffa9ca369ec02413301ad8db43e63c3\cpr-download-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\cpr-download\CMakeFiles\8ffa9ca369ec02413301ad8db43e63c3\cpr-download-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\cpr-download\CMakeFiles\8ffa9ca369ec02413301ad8db43e63c3\cpr-download-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\cpr-download\CMakeFiles\8ffa9ca369ec02413301ad8db43e63c3\cpr-download-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\cpr-download\CMakeFiles\8ffa9ca369ec02413301ad8db43e63c3\cpr-download-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\cpr-download\CMakeFiles\d2f566790249bfee4ae08e01ec0074fa\cpr-download-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\cpr-download\CMakeFiles\763e2930f6a7b178262b87f32e1163c1\cpr-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\kai\source\repos\server\server\build\cpr-download\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\kai\source\repos\server\server\build\cpr-download\CMakeFiles\cpr-download" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{35539837-FCC5-357A-B973-3E44DAC5BD5A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
