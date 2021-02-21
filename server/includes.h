@@ -58,7 +58,7 @@ public:
 		struct tm* ntm = gmtime(&now);
 
 		std::string _time = std::to_string(ntm->tm_year + 1900) + "-" + std::to_string(ntm->tm_mon + 1) + "-" + std::to_string(ntm->tm_mday) + " " + std::to_string(ntm->tm_hour) + ":" + std::to_string(ntm->tm_min) + ":" + std::to_string(ntm->tm_sec);
-		std::string fname = "log " + _time + ".log";
+		std::string fname = "logs\\log " + _time + ".log";
 
 		switch (sl)
 		{
