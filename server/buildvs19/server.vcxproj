@@ -114,7 +114,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\kai\source\repos\server\server\deps\sleepy-discord\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\asio\asio\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\websocketpp;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\opt\curl\include;C:\Users\kai\source\repos\server\server\buildvs19\deps\sleepy-discord\deps\cpr\opt\curl\include\curl;C:\Program Files\OpenSSL-Win64\include;C:\Program Files\MySQL\MySQL Connector C++ 8.0\include\jdbc;C:\Program Files\MySQL\MySQL Connector C++ 8.0\include\mysql;C:\Program Files\MySQL\MySQL Connector C++ 8.0\include\mysqlx;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\kai\source\repos\server\server\deps\sleepy-discord\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\asio\asio\include;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\websocketpp;C:\Users\kai\source\repos\server\server\deps\sleepy-discord\deps\cpr\opt\curl\include;C:\Users\kai\source\repos\server\server\buildvs19\deps\sleepy-discord\deps\cpr\opt\curl\include\curl;C:\Program Files\OpenSSL-Win64\include;C:\Program Files\MySQL\MySQL Connector C++ 8.0\include\jdbc;C:\Program Files\MySQL\MySQL Connector C++ 8.0\include\mysql;C:\Program Files\MySQL\MySQL Connector C++ 8.0\include\mysqlx;C:\boost_1_55_0\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -143,7 +143,7 @@
     <Link>
       <AdditionalDependencies>deps\sleepy-discord\sleepy_discord\RelWithDebInfo\sleepy-discord.lib;lib\RelWithDebInfo\cpr.lib;lib\RelWithDebInfo\libcurl.lib;wldap32.lib;winmm.lib;ws2_32.lib;crypt32.lib;C:\Program Files\OpenSSL-Win64\lib\VC\libssl64MD.lib;C:\Program Files\OpenSSL-Win64\lib\VC\libcrypto64MD.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;libssl.lib;libcrypto.lib;mysqlcppconn.lib;mysqlcppconn8.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Program Files\MySQL\MySQL Connector C++ 8.0\lib64\vs14;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64 -lboost_log_setup</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>C:/Users/kai/source/repos/server/server/buildvs19/RelWithDebInfo/server.lib</ImportLibrary>
@@ -272,7 +272,29 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Name>sleepy-discord</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\boost.1.72.0.0\build\boost.targets" Condition="Exists('packages\boost.1.72.0.0\build\boost.targets')" />
+    <Import Project="packages\boost_date_time-vc141.1.72.0.0\build\boost_date_time-vc141.targets" Condition="Exists('packages\boost_date_time-vc141.1.72.0.0\build\boost_date_time-vc141.targets')" />
+    <Import Project="packages\boost_log-vc141.1.72.0.0\build\boost_log-vc141.targets" Condition="Exists('packages\boost_log-vc141.1.72.0.0\build\boost_log-vc141.targets')" />
+    <Import Project="packages\boost_system-vc141.1.72.0.0\build\boost_system-vc141.targets" Condition="Exists('packages\boost_system-vc141.1.72.0.0\build\boost_system-vc141.targets')" />
+    <Import Project="packages\boost_thread-vc141.1.72.0.0\build\boost_thread-vc141.targets" Condition="Exists('packages\boost_thread-vc141.1.72.0.0\build\boost_thread-vc141.targets')" />
+    <Import Project="packages\boost_log_setup-vc141.1.72.0.0\build\boost_log_setup-vc141.targets" Condition="Exists('packages\boost_log_setup-vc141.1.72.0.0\build\boost_log_setup-vc141.targets')" />
+    <Import Project="packages\boost_chrono-vc141.1.72.0.0\build\boost_chrono-vc141.targets" Condition="Exists('packages\boost_chrono-vc141.1.72.0.0\build\boost_chrono-vc141.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\boost.1.72.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost.1.72.0.0\build\boost.targets'))" />
+    <Error Condition="!Exists('packages\boost_date_time-vc141.1.72.0.0\build\boost_date_time-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost_date_time-vc141.1.72.0.0\build\boost_date_time-vc141.targets'))" />
+    <Error Condition="!Exists('packages\boost_log-vc141.1.72.0.0\build\boost_log-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost_log-vc141.1.72.0.0\build\boost_log-vc141.targets'))" />
+    <Error Condition="!Exists('packages\boost_system-vc141.1.72.0.0\build\boost_system-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost_system-vc141.1.72.0.0\build\boost_system-vc141.targets'))" />
+    <Error Condition="!Exists('packages\boost_thread-vc141.1.72.0.0\build\boost_thread-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost_thread-vc141.1.72.0.0\build\boost_thread-vc141.targets'))" />
+    <Error Condition="!Exists('packages\boost_log_setup-vc141.1.72.0.0\build\boost_log_setup-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost_log_setup-vc141.1.72.0.0\build\boost_log_setup-vc141.targets'))" />
+    <Error Condition="!Exists('packages\boost_chrono-vc141.1.72.0.0\build\boost_chrono-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost_chrono-vc141.1.72.0.0\build\boost_chrono-vc141.targets'))" />
+  </Target>
 </Project>

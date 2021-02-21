@@ -12,11 +12,14 @@ public:
 	using SleepyDiscord::DiscordClient::DiscordClient;
 	void onMessage(SleepyDiscord::Message msg) override {
 		manager db;
+		klog log;
 		if (msg.startsWith(".info")) {
+			log.out(0, "[discord] " + msg.author.username + "#" + msg.author.discriminator + " called .info");
 			sendMessage(msg.channelID, "> *Smoke'em*\n> Store: https://shoppy.gg/@smokedrugs69 \n> If you have purchased a package from the store please wait up to **10 minutes** and message *this bot* `.help.`");
 		}
 		else if (msg.startsWith(".help"))
 		{
+			log.out(0, "[discord] " + msg.author.username + "#" + msg.author.discriminator + " called .help");
 			if (msg.serverID.string().length() > 1)
 			{
 				sendMessage(msg.channelID, "> *Sorry* but this command is only available in PM!");
@@ -27,6 +30,7 @@ public:
 		}
 		else if (msg.startsWith(".unlock") && msg.content.length() > 8)
 		{
+			log.out(0, "[discord] " + msg.author.username + "#" + msg.author.discriminator + " called .unlock");
 			std::string tmp = db.explode(msg.content, ' ')[1];
 			if (db.isAccountLocked(tmp) != 1)
 			{
@@ -43,6 +47,7 @@ public:
 		}
 		else if (msg.startsWith(".locked") && msg.content.length() > 8)
 		{
+			log.out(0, "[discord] " + msg.author.username + "#" + msg.author.discriminator + " called .locked");
 			std::string tmp = db.explode(msg.content, ' ')[1];
 			if (db.isAccountLocked(tmp) == 1)
 			{
@@ -56,6 +61,7 @@ public:
 		}
 		else if (msg.startsWith(".auth"))
 		{
+			log.out(0, "[discord] " + msg.author.username + "#" + msg.author.discriminator + " called .auth");
 			if (msg.serverID.string().length() > 1)
 			{
 				sendMessage(msg.channelID, "> *Sorry* but this command is only available in PM!");
@@ -93,6 +99,7 @@ public:
 		}
 		else if (msg.startsWith(".reg"))
 		{
+			log.out(0, "[discord] " + msg.author.username + "#" + msg.author.discriminator + " called .reg");
 			if (msg.serverID.string().length() > 1)
 			{
 				sendMessage(msg.channelID, "> *Sorry* but this command is only available in PM!");
@@ -134,7 +141,9 @@ public:
 							return;
 						}
 
+			log.out(0, "[mysql] hash() called with data: " + passwd);
 			std::string pwdhash = md5.digestString(strdup(passwd.c_str()));
+			log.out(0, "[mysql] hash() called with data: " + passwd + " returned: " + pwdhash);
 			if (db.doesUsernameExist(uname))
 			{
 				sendMessage(msg.channelID, "> *Sorry*  but that username already exists!");
@@ -148,12 +157,17 @@ public:
 
 			db.addUser(uname, pwdhash, accessLevel, "not_set", duid);
 
-			if (!db.isOrderPaidFor(auth))
+			log.out(0, "[discord] " + msg.author.username + "#" + msg.author.discriminator + " has created an account with the id: " + std::to_string(db.getUid(uname)));
+			if (!db.isOrderPaidFor(auth)) {
+
+				log.out(1, "[discord] " + msg.author.username + "#" + msg.author.discriminator + " has redemeed order " + auth + " that is not yet paid for");
 				sendMessage(msg.channelID, "> **WARNING**\n> \n> *This order has not yet been paid for, meaning you will not be able to use the software!*");
+			}
 			else {
 				db.setSubDate("NOW()", accessLevel, db.getUid(uname));
 				
 				//set discord role
+				/*
 				std::vector<SleepyDiscord::Snowflake<SleepyDiscord::Role>> roleToAdd;
 				SleepyDiscord::Role _r;
 
@@ -173,7 +187,7 @@ public:
 					break;
 				}
 
-				editMember("745677254499106826", msg.author, "", roleToAdd, 0, 0, msg.channelID);
+				editMember("745677254499106826", msg.author, "", roleToAdd, 0, 0, msg.channelID);*/
 				
 			}
 				//db.ExecuteNonQuery("UPDATE users SET subscriptionStart=DATE(NOW()) WHERE uid=" + std::to_string(db.getUid(uname)) + ";");

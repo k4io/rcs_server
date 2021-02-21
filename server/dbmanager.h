@@ -13,6 +13,7 @@
 class manager
 {
 public:
+	klog out;
 	std::vector<char> badchars = {
 		'\'',
 		'@',
@@ -47,7 +48,6 @@ public:
 	bool doesDuidExist(std::string duid);
 	bool isOrderRedeemed(std::string orderid);
 	std::string getHwid(std::string uid);
-	std::string hash(const void* data, const size_t data_size, HashType hashType);
 	int getUid(std::string uid); //username
 	bool doesUsernameExist(std::string username);
 	bool doesUidExist(int uid);

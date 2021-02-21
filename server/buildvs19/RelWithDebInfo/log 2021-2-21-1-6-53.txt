@@ -1,0 +1,107 @@
+<$> Hello kai!
+
+[2021-2-21 1:6:53]	[info]: [main] Starting...<$> Initializing modules: Discord, Database handler, Client handler, Server input handler
+
+[2021-2-21 1:6:53]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:6:53]	[info]: [mysql] Connected to database.
+[2021-2-21 1:6:53]	[info]: [main] Ready
+[2021-2-21 1:6:53]	[info]: [orders] Setting up order server...
+[2021-2-21 1:6:53]	[info]: [orders] Server ready!
+[2021-2-21 1:6:53]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users;
+[2021-2-21 1:6:53]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:6:53]	[info]: [mysql] Connected to database.
+[2021-2-21 1:6:53]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users; returned: 
+[2021-2-21 1:6:53]	[info]: [accounts] Checking for outdated or broken accounts![2021-02-21 01:06:54] [connect] Successful connection
+[2021-02-21 01:06:54] [connect] WebSocket Connection 162.159.134.234:443 v-2 "WebSocket++/0.8.2" /?v=6 101
+
+[2021-2-21 1:6:57]	[info]: [orders] Client connected![~] Order received: fbd200ad-89b2-42ac-bf99-67306b951fc9|luRxb1O|2021-02-20 20:14:17|null
+
+[2021-2-21 1:6:58]	[info]: [orders] Recieved order > fbd200ad-89b2-42ac-bf99-67306b951fc9|luRxb1O|2021-02-20 20:14:17|null
+[2021-2-21 1:6:58]	[info]: [mysql] ExecuteQuery() called with query: SELECT orderid FROM orders;
+[2021-2-21 1:6:58]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:6:58]	[info]: [mysql] Connected to database.
+[2021-2-21 1:6:58]	[info]: [mysql] ExecuteQuery() called with query: SELECT orderid FROM orders; returned: 
+[2021-2-21 1:6:58]	[info]: [mysql] ExecuteNonQuery() called with query: INSERT INTO orders (orderid, orderdate, accessLevel, order_paid_for) VALUES ('fbd200ad-89b2-42ac-bf99-67306b951fc9', DATE('2021-02-20 20:14:17'), 4, 0);
+[2021-2-21 1:6:58]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:6:58]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:9]	[info]: [discord] kaio#7754 called .auth
+[2021-2-21 1:7:9]	[info]: [mysql] ExecuteQuery() called with query: SELECT orderid FROM orders;
+[2021-2-21 1:7:9]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:9]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:9]	[info]: [mysql] ExecuteQuery() called with query: SELECT orderid FROM orders; returned: fbd200ad-89b2-42ac-bf99-67306b951fc9
+
+[2021-2-21 1:7:9]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:9]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:9]	[info]: [mysql] ExecuteQuery() called with query: SELECT orderid FROM orders;
+[2021-2-21 1:7:9]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:9]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:9]	[info]: [mysql] ExecuteQuery() called with query: SELECT orderid FROM orders; returned: fbd200ad-89b2-42ac-bf99-67306b951fc9
+
+[2021-2-21 1:7:9]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:9]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:12]	[info]: [discord] kaio#7754 called .reg
+[2021-2-21 1:7:12]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:12]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:12]	[info]: [mysql] hash() called with data: kaio123
+[2021-2-21 1:7:12]	[info]: [mysql] hash() called with data: kaio123 returned: 8d6ab4eed2eb5e5f98c00bca318de102
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai';
+[2021-2-21 1:7:12]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:12]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai'; returned: 
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE discorduid='156508892854091776';
+[2021-2-21 1:7:12]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:12]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE discorduid='156508892854091776'; returned: 
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteNonQuery() called with query: INSERT INTO users (username, accessLevel, pwdhash, hwid, creation_date, discorduid) VALUES ('kai', 4, '8d6ab4eed2eb5e5f98c00bca318de102', 'not_set', NOW(), '156508892854091776')
+[2021-2-21 1:7:12]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:12]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai';
+[2021-2-21 1:7:12]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:12]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai'; returned: 38
+
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai';
+[2021-2-21 1:7:12]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:12]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai'; returned: 38
+
+[2021-2-21 1:7:12]	[info]: [discord] kaio#7754 has created an account with the id: 38
+[2021-2-21 1:7:12]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:12]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai';
+[2021-2-21 1:7:12]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:12]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai'; returned: 38
+
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai';
+[2021-2-21 1:7:12]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:12]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai'; returned: 38
+
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteNonQuery() called with query: UPDATE users SET subscriptionStart=DATE(NOW()) WHERE uid=38;
+[2021-2-21 1:7:12]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:12]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT subscriptionStart FROM users WHERE uid='38';
+[2021-2-21 1:7:12]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:12]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteQuery() called with query: SELECT subscriptionStart FROM users WHERE uid='38'; returned: 2021-02-21 00:00:00
+
+[2021-2-21 1:7:12]	[info]: [mysql] ExecuteNonQuery() called with query: UPDATE users SET subscriptionEnd=DATE('2021-8-20') WHERE uid=38;
+[2021-2-21 1:7:12]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:12]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:13]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai';
+[2021-2-21 1:7:13]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:13]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:13]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai'; returned: 38
+
+[2021-2-21 1:7:13]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai';
+[2021-2-21 1:7:13]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:13]	[info]: [mysql] Connected to database.
+[2021-2-21 1:7:13]	[info]: [mysql] ExecuteQuery() called with query: SELECT uid FROM users WHERE username='kai'; returned: 38
+
+[2021-2-21 1:7:13]	[info]: [mysql] ExecuteNonQuery() called with query: UPDATE orders SET uid=38 WHERE orderid='fbd200ad-89b2-42ac-bf99-67306b951fc9';
+[2021-2-21 1:7:13]	[info]: [mysql] Attempting to connect to database...
+[2021-2-21 1:7:13]	[info]: [mysql] Connected to database.recv failed with error: 10054
+
+[2021-2-21 1:7:32]	[info]: [orders] Setting up order server...
+[2021-2-21 1:7:32]	[info]: [orders] Server ready!

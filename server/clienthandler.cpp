@@ -28,9 +28,11 @@ orderchecker::~orderchecker()
 };
 int orderchecker::start()
 {
+    klog out;
     manager db;
     WSADATA wsaData;
     int iResult;
+    out.out(0, "[orders] Setting up order server...");
 
     SOCKET ListenSocket = INVALID_SOCKET;
     SOCKET ClientSocket = INVALID_SOCKET;
@@ -90,7 +92,7 @@ int orderchecker::start()
         return 1;
     }
 
-    //
+    out.out(0, "[orders] Server ready!");
 
     // Accept a client socket
     ClientSocket = accept(ListenSocket, NULL, NULL);
@@ -100,9 +102,11 @@ int orderchecker::start()
         WSACleanup();
         return 1;
     }
+    out.out(0, "[orders] Client connected!");
 
     // No longer need server socket
     closesocket(ListenSocket);
+
 
     do {
         iResult = recv(ClientSocket, recvbuf, recvbuflen, 0);
@@ -111,9 +115,9 @@ int orderchecker::start()
             for (size_t i = 127; i > 0; i--)
                 if ((int)recvbuf[i] == -52) recvbuf[i] = 0;
 
-            printf("[~] Order received: %s\n", recvbuf);
             char* c = recvbuf;
             std::string s = c;
+            out.out(0, "[orders] Recieved order > " + s);
             std::vector<std::string> orderinfo = db.explode(s, '|');
 
             int al = 0;
@@ -136,16 +140,16 @@ int orderchecker::start()
                 al,
                 i
             };
-
+            
             if (!db.doesOrderExist(_o.order_id))
                 db.addOrder(_o);
         }
         else if (iResult == 0) {
-            printf("Connection closing...\n");
+            out.out(0, "[orders] Connection closing. :" + WSAGetLastError());
             exit(-1);
         }
         else {
-            printf("recv failed with error: %d\n", WSAGetLastError());
+            out.out(0, "[orders] recv failed with error :" + WSAGetLastError());
             closesocket(ClientSocket);
             WSACleanup();
             return 1;
@@ -171,11 +175,12 @@ void accountchecker::start() {
     while (true)
     {
         manager db;
+        klog out;
         std::vector<std::string> v(db.explode(db.getAllUids(), '\n'));
+        out.out(0, "[accounts] Checking for outdated or broken accounts!");
         for (auto a : v)
         {
             int id = stoi(a);
-
             std::string timeindb = db.getSubEndDate(id);
             if (timeindb == "\n")
                 continue;
@@ -202,6 +207,7 @@ void accountchecker::start() {
 
             if (start < now)
             {
+                 out.out(0, "[accounts] User id " + std::to_string(id) + "'s subscription has expired!");
                  db.expiredUser(id);
             }
 

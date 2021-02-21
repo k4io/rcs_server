@@ -13,7 +13,7 @@ manager::~manager()
 bool manager::connect()
 {
 	using namespace std;
-
+	out.out(0, "[mysql] Checking connection to database");
 	sql::Driver* driver;
 	sql::Connection* conn;
 
@@ -27,6 +27,7 @@ bool manager::connect()
 		return true;
 	}
 	catch (sql::SQLException& e) {
+		out.out(2, "[mysql] Could not connect to database");
 		cout << "# ERR: SQLException in " << __FILE__;
 		cout << "(" << __FUNCTION__ << ") on line "
 			<< __LINE__ << endl;
@@ -40,6 +41,7 @@ bool manager::connect()
 
 std::string manager::ExecuteNonQuery(std::string query)
 {
+	out.out(0, "[mysql] ExecuteNonQuery() called with query: " + query);
 	using namespace std;
 	try {
 		std::string s = "";
@@ -49,6 +51,7 @@ std::string manager::ExecuteNonQuery(std::string query)
 		return s;
 	}
 	catch (sql::SQLException& e) {
+		out.out(2, "[mysql] ExecuteNonQuery() Errored with query: " + query);
 		cout << "# ERR: SQLException in " << __FILE__;
 		cout << "(" << __FUNCTION__ << ") on line "
 			<< __LINE__ << endl;
@@ -62,6 +65,7 @@ std::string manager::ExecuteNonQuery(std::string query)
 
 std::string manager::ExecuteQuery(std::string query, std::string column)
 {
+	out.out(0, "[mysql] ExecuteQuery() called with query: " + query);
 	using namespace std;
 	try {
 	std::string s = "";
@@ -72,6 +76,7 @@ std::string manager::ExecuteQuery(std::string query, std::string column)
 	while (res->next())
 		s += res->getString(column) + "\n";
 
+	out.out(0, "[mysql] ExecuteQuery() called with query: " + query + " returned: " + s);
 	return s;
 	}
 	catch (sql::SQLException& e) {
@@ -89,18 +94,21 @@ std::string manager::ExecuteQuery(std::string query, std::string column)
 
 int manager::ExecuteQueryInt(std::string query, std::string column)
 {
+	out.out(0, "[mysql] ExecuteQueryInt() called with query: " + query);
 	using namespace std;
 	try {
 		std::string s = "";
 		if (!connect())
 			return -69;
 		res = stmt->executeQuery(query);
-
+		int i = DBINTERROR;
 		while (res->next())
-			return res->getInt(column);
-		return DBINTERROR;
+			i = res->getInt(column);
+		out.out(0, "[mysql] ExecuteQueryInt() called with query: " + query + " returned: " + std::to_string(i));
+		return i;
 	}
 	catch (sql::SQLException& e) {
+		out.out(2, "[mysql] ExecuteQueryInt() Errored with query: " + query);
 		cout << "# ERR: SQLException in " << __FILE__;
 		cout << "(" << __FUNCTION__ << ") on line "
 			<< __LINE__ << endl;
@@ -475,32 +483,4 @@ void manager::unlockAccount(std::string username)
 	std::string s = "UPDATE users SET locked=0 WHERE username='" + username + "';";
 	ExecuteNonQuery(s);
 	return;
-}
-
-std::string manager::hash(const void* data, const size_t data_size, HashType hashType)
-{
-	HCRYPTPROV hProv = NULL;
-
-	if (!CryptAcquireContext(&hProv, NULL, NULL, PROV_RSA_AES, CRYPT_VERIFYCONTEXT)) {
-		return "";
-	}
-
-	BOOL hash_ok = FALSE;
-	HCRYPTPROV hHash = NULL;
-	switch (hashType) {
-	case HashSha1: hash_ok = CryptCreateHash(hProv, CALG_SHA1, 0, 0, &hHash); break;
-	case HashMd5: hash_ok = CryptCreateHash(hProv, CALG_MD5, 0, 0, &hHash); break;
-	case HashSha256: hash_ok = CryptCreateHash(hProv, CALG_SHA_256, 0, 0, &hHash); break;
-	}
-
-	if (!hash_ok) {
-		CryptReleaseContext(hProv, 0);
-		return "";
-	}
-
-	if (!CryptHashData(hHash, static_cast<const BYTE*>(data), data_size, 0)) {
-		CryptDestroyHash(hHash);
-		CryptReleaseContext(hProv, 0);
-		return "";
-	}
 }

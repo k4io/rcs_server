@@ -11,7 +11,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string>
 #include <sys/types.h> 
 #include <winsock2.h>
 #include <chrono>
@@ -19,6 +19,7 @@
 #include <Wincrypt.h>
 #include <iomanip>
 #include <sstream>
+#include <cstdio>
 #include <time.h>
 #include "md5.h"
 
@@ -26,6 +27,60 @@
 #define DEFAULT_ORDER_PORT "51001"
 #define DEFAULT_CLIENT_PORT "51005"
 #define DBINTERROR -1
+
+#define SL_INFO = 0
+#define SL_WARN = 1
+#define SL_ERROR = 2
+#define SL_FATAL = 3
+
+class klog
+{
+public:
+	static void init()
+	{
+		time_t now = time(0);
+		struct tm* ntm = gmtime(&now);
+		std::string _time = std::to_string(ntm->tm_year + 1900) + "-" + std::to_string(ntm->tm_mon + 1) + "-" + std::to_string(ntm->tm_mday) + "-" + std::to_string(ntm->tm_hour) + "-" + std::to_string(ntm->tm_min) + "-" + std::to_string(ntm->tm_sec);
+		std::string fname = "log " + _time;
+
+		freopen(fname.c_str(), "w", stdout);
+		/*
+		std::ofstream out(fname.c_str());
+		std::streambuf* coutbuf = std::cout.rdbuf(); //save old buf
+		std::cout.rdbuf(out.rdbuf()); //redirect std::cout to out.txt!
+		std::ofstream out(fname.c_str());
+		std::streambuf* coutbuf = std::cerr.rdbuf();
+		std::cerr.rdbuf(out.rdbuf());*/
+	}
+	static void out(int sl, std::string msg)
+	{
+		time_t now = time(0);
+		struct tm* ntm = gmtime(&now);
+
+		std::string _time = std::to_string(ntm->tm_year + 1900) + "-" + std::to_string(ntm->tm_mon + 1) + "-" + std::to_string(ntm->tm_mday) + " " + std::to_string(ntm->tm_hour) + ":" + std::to_string(ntm->tm_min) + ":" + std::to_string(ntm->tm_sec);
+		std::string fname = "log " + _time + ".log";
+
+		switch (sl)
+		{
+		case 0:
+			printf("\n[%s]	[info]: %s", _time.c_str(), msg.c_str());
+			//std::cout << "[" << _time << "]	[info]: " << msg;
+			break;
+		case 1:
+			printf("\n[%s]	[warning]: %s", _time.c_str(), msg.c_str());
+			//std::cout << "[" << _time << "]	[warning]: " << msg;
+			break;
+		case 2:
+			printf("\n[%s]	[error]: %s", _time.c_str(), msg.c_str());
+			//std::cout << "[" << _time << "]	[error]: " << msg;
+			break;
+		case 3:
+			printf("\n[%s]	[fatal]: %s", _time.c_str(), msg.c_str());
+			//std::cout << "[" << _time << "]	[fatal]: " << msg;
+			break;
+		}
+	}
+};
 
 struct Order
 {

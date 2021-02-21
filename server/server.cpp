@@ -25,9 +25,10 @@ void checkAccounts()
 	accountchecker ac;
 	ac.start();
 }
-
 int main()
 {
+	klog log;
+	log.init();
 #ifdef __linux__
 	char* uname = "";
 	getlogin_r(uname, MAX_PATH);
@@ -43,7 +44,7 @@ int main()
 	printf("<$> OS Not supported!\n<$> Contact kaio#7754.\n");
 	exit(0);
 #endif
-
+	log.out(0, "[main] Starting...");
 	printf("<$> Initializing modules: Discord, Database handler, Client handler, Server input handler\n");
 	std::thread botThread(runbot);
 	botThread.detach();
@@ -55,7 +56,6 @@ int main()
 	//Client handling
 	std::thread clientThread(clients);
 	clientThread.detach();
-
 	//order checkin
 	std::thread orderThread(getOrders);
 	orderThread.detach();
@@ -63,6 +63,7 @@ int main()
 	//account checkin
 	std::thread accThread(checkAccounts);
 	accThread.detach();
+	log.out(0, "[main] Ready");
 
 	for (;;) SleepEx(1,false);
 }
