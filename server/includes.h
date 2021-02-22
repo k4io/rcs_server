@@ -9,7 +9,6 @@
 #include <Lmcons.h>
 #include <vector>
 #include <string>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string>
 #include <sys/types.h> 
@@ -21,12 +20,22 @@
 #include <sstream>
 #include <cstdio>
 #include <time.h>
+#include <openssl/bio.h>
+#include <openssl/err.h>
+#include <openssl/ssl.h>
+#include <openssl/sha.h>
 #include "md5.h"
+
+#pragma comment(lib, "ws2_32.lib")
+
+#define buffSize 1024
 
 #define DEFAULT_BUFLEN 128
 #define DEFAULT_ORDER_PORT "51001"
 #define DEFAULT_CLIENT_PORT "51005"
 #define DBINTERROR -1
+
+#define CurrentClientVersion "v0.1"
 
 #define SL_INFO = 0
 #define SL_WARN = 1
@@ -41,8 +50,9 @@ public:
 		time_t now = time(0);
 		struct tm* ntm = gmtime(&now);
 		std::string _time = std::to_string(ntm->tm_year + 1900) + "-" + std::to_string(ntm->tm_mon + 1) + "-" + std::to_string(ntm->tm_mday) + "-" + std::to_string(ntm->tm_hour) + "-" + std::to_string(ntm->tm_min) + "-" + std::to_string(ntm->tm_sec);
-		std::string fname = "log " + _time;
+		std::string fname = "logs\\log " + _time + ".log";
 
+		//freopen(fname.c_str(), "w", stderr);
 		freopen(fname.c_str(), "w", stdout);
 		/*
 		std::ofstream out(fname.c_str());
@@ -58,25 +68,25 @@ public:
 		struct tm* ntm = gmtime(&now);
 
 		std::string _time = std::to_string(ntm->tm_year + 1900) + "-" + std::to_string(ntm->tm_mon + 1) + "-" + std::to_string(ntm->tm_mday) + " " + std::to_string(ntm->tm_hour) + ":" + std::to_string(ntm->tm_min) + ":" + std::to_string(ntm->tm_sec);
-		std::string fname = "logs\\log " + _time + ".log";
+		//std::string fname = "logs\\log " + _time + ".log";
 
 		switch (sl)
 		{
 		case 0:
-			printf("\n[%s]	[info]: %s", _time.c_str(), msg.c_str());
-			//std::cout << "[" << _time << "]	[info]: " << msg;
+			//printf("\n[%s]	[info]: %s", _time.c_str(), msg.c_str());
+			std::cerr << "[" << _time.c_str() << "]  [info]: " << msg.c_str() << std::endl;
 			break;
 		case 1:
-			printf("\n[%s]	[warning]: %s", _time.c_str(), msg.c_str());
-			//std::cout << "[" << _time << "]	[warning]: " << msg;
+			//printf("\n[%s]	[warning]: %s", _time.c_str(), msg.c_str());
+			std::cerr << "[" << _time.c_str() << "]  [warning]: " << msg.c_str() << std::endl;
 			break;
 		case 2:
-			printf("\n[%s]	[error]: %s", _time.c_str(), msg.c_str());
-			//std::cout << "[" << _time << "]	[error]: " << msg;
+			//printf("\n[%s]	[error]: %s", _time.c_str(), msg.c_str());
+			std::cerr << "[" << _time.c_str() << "]  [error]: " << msg.c_str() << std::endl;
 			break;
 		case 3:
-			printf("\n[%s]	[fatal]: %s", _time.c_str(), msg.c_str());
-			//std::cout << "[" << _time << "]	[fatal]: " << msg;
+			//printf("\n[%s]	[fatal]: %s", _time.c_str(), msg.c_str());
+			std::cerr << "[" << _time.c_str() << "]  [fatal]: " << msg.c_str() << std::endl;
 			break;
 		}
 	}

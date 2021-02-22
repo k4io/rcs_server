@@ -62,12 +62,18 @@ public:
 	int isAccountLocked(std::string username);
 	std::string getLockedReason(std::string username);
 	void unlockAccount(std::string username);
+	std::string hash(std::string str);
 	std::string getAllUids();
 	std::string getUname(int uid);
 	std::string getSubDate(int uid);
 	std::string getSubEndDate(int uid);
 	void setSubDate(std::string date, int accessLevel, int uid);
 	void expiredUser(int uid);
+	int getAccessLevel(int uid);
+	int checkPassword(std::string uname, std::string pwd);
+	std::string getAllPremiumPlus();
+	std::string getAllPremium();
+	void lockAccount(int uid, std::string lockReason);
 
 	std::vector<std::string> explode(const std::string& s, const char& c)
 	{

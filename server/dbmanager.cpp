@@ -26,8 +26,8 @@ bool manager::connect()
 		stmt = conn->createStatement();
 		return true;
 	}
-	catch (sql::SQLException& e) {
-		out.out(2, "[mysql] Could not connect to database");
+	catch (sql::SQLException& e) { 
+		out.out(3, "[mysql] Could not connect to database");
 		cout << "# ERR: SQLException in " << __FILE__;
 		cout << "(" << __FUNCTION__ << ") on line "
 			<< __LINE__ << endl;
@@ -51,7 +51,7 @@ std::string manager::ExecuteNonQuery(std::string query)
 		return s;
 	}
 	catch (sql::SQLException& e) {
-		out.out(2, "[mysql] ExecuteNonQuery() Errored with query: " + query);
+		out.out(3, "[mysql] ExecuteNonQuery() Errored with query: " + query);
 		cout << "# ERR: SQLException in " << __FILE__;
 		cout << "(" << __FUNCTION__ << ") on line "
 			<< __LINE__ << endl;
@@ -75,6 +75,8 @@ std::string manager::ExecuteQuery(std::string query, std::string column)
 
 	while (res->next())
 		s += res->getString(column) + "\n";
+
+	s = s.substr(0, s.length() - 1);
 
 	out.out(0, "[mysql] ExecuteQuery() called with query: " + query + " returned: " + s);
 	return s;
@@ -108,7 +110,7 @@ int manager::ExecuteQueryInt(std::string query, std::string column)
 		return i;
 	}
 	catch (sql::SQLException& e) {
-		out.out(2, "[mysql] ExecuteQueryInt() Errored with query: " + query);
+		out.out(3, "[mysql] ExecuteQueryInt() Errored with query: " + query);
 		cout << "# ERR: SQLException in " << __FILE__;
 		cout << "(" << __FUNCTION__ << ") on line "
 			<< __LINE__ << endl;
@@ -369,11 +371,9 @@ void manager::removeOrder(std::string orderid)
 
 void manager::setHwid(int uid, std::string hwid)
 {
-	if (doesUidExist(uid)) {
-		std::string s = "UPDATE users SET hwid='" + hwid + "' WHERE uid=" + std::to_string(uid) + ";";
+	std::string s = "UPDATE users SET hwid='" + hwid + "' WHERE uid=" + std::to_string(uid) + ";";
 		ExecuteNonQuery(s);
-		return;
-	}
+	return;
 }
 
 int manager::isAccountLocked(std::string username)
@@ -478,9 +478,70 @@ void manager::expiredUser(int uid)
 	ExecuteNonQuery("DELETE FROM users WHERE uid=" + std::to_string(uid) + ";");
 }
 
+int manager::getAccessLevel(int uid) {
+	return ExecuteQueryInt("SELECT accessLevel FROM users WHERE uid=" + std::to_string(uid) + ";", "accessLevel");
+}
+
+int manager::checkPassword(std::string uname, std::string pwd)
+{
+	std::vector<std::string> ret = explode(ExecuteQuery("SELECT username FROM users WHERE pwdhash='" + pwd + "' AND username='" + uname + "';", "username"), '\n');
+	if (ret.size() == 0)
+	{
+		return 0;
+	}
+	return 1;
+}
+
+std::string manager::getAllPremiumPlus() 
+{
+	std::vector<std::string> uids = explode(getAllUids(), '\n');
+	std::string ret = "";
+	for (auto a : uids)
+	{
+		int lvl = getAccessLevel(stoi(a));
+		if (lvl == 2 || lvl == 4)
+			ret += a + '\n';
+	}
+	return ret;
+}
+
+std::string manager::getAllPremium() 
+{
+	std::vector<std::string> uids = explode(getAllUids(), '\n');
+	std::string ret = "";
+	for (auto a : uids)
+	{
+		int lvl = getAccessLevel(stoi(a));
+		if (lvl == 1 || lvl == 3)
+			ret += a + '\n';
+	}
+	return ret;
+}
+
 void manager::unlockAccount(std::string username)
 {
 	std::string s = "UPDATE users SET locked=0 WHERE username='" + username + "';";
 	ExecuteNonQuery(s);
 	return;
+}
+
+std::string manager::hash(std::string str)
+{
+	klog log;
+	unsigned char hash[SHA256_DIGEST_LENGTH];
+	SHA256_CTX sha256;
+	SHA256_Init(&sha256);
+	SHA256_Update(&sha256, str.c_str(), str.size());
+	SHA256_Final(hash, &sha256);
+	std::stringstream ss;
+	for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
+	{
+		ss << std::hex << std::setw(2) << std::setfill('0') << (int)hash[i];
+	}
+	log.out(0, "[mysql] hash() called with data: " + str + " returned: " + ss.str());
+	return ss.str();
+}
+
+void manager::lockAccount(int uid, std::string lockReason) {
+	ExecuteNonQuery("UPDATE users SET locked=1,lockedreason='" + lockReason + "' WHERE uid=" + std::to_string(uid) + ";");
 }

@@ -27,7 +27,6 @@
     <ClInclude Include="C:\Users\kai\source\repos\server\server\includes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="md5.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\kai\source\repos\server\server\CMakeLists.txt" />

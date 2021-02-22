@@ -17,6 +17,7 @@ void clients()
 void runbot()
 {
 	discord bot("NzQ4MzI5NjE5MDY4ODEzNDQz.X0b2RA.mn5eOh4_PwHGm12gAq0N_Iek86A", SleepyDiscord::USER_CONTROLED_THREADS);
+
 	bot.run();
 }
 
@@ -29,23 +30,9 @@ int main()
 {
 	klog log;
 	log.init();
-#ifdef __linux__
-	char* uname = "";
-	getlogin_r(uname, MAX_PATH);
-	printf("<$> Hello %s!\n", uname);
 
-#elif _WIN32
-	char un[MAX_PATH];
-	DWORD un_len = MAX_PATH + 1;
-	GetUserName(un, &un_len);
-	printf("<$> Hello %s!\n", un);
-
-#else
-	printf("<$> OS Not supported!\n<$> Contact kaio#7754.\n");
-	exit(0);
-#endif
 	log.out(0, "[main] Starting...");
-	printf("<$> Initializing modules: Discord, Database handler, Client handler, Server input handler\n");
+	
 	std::thread botThread(runbot);
 	botThread.detach();
 

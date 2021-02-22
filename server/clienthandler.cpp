@@ -7,7 +7,54 @@ clienthandler::~clienthandler() { stop(); }
 
 void clienthandler::start()
 {
+    SleepEx(250, false);
+    klog out;
+    out.out(0, "[clients] Starting SSL/TLS server with cert.pem and key.pem...");
+    int sock;
+    SSL_CTX* ctx;
 
+    init_ssl();
+    ctx = create_context();
+
+    configure_context(ctx);
+
+    sock = create_socket(51005);
+    out.out(0, "[clients] Created custom socket on port 51005");
+
+    /* Handle connections */
+    while (1) {
+        struct sockaddr_in addr; 
+        int len = sizeof(addr);
+        //SSL* ssl;
+        strcpy(reply, "test\n");
+
+        client = accept(sock, (struct sockaddr*)&addr, &len);
+        if (client < 0) {
+            perror("Unable to accept");
+            exit(EXIT_FAILURE);
+        }
+        //std::string str;
+        char str[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &(addr.sin_addr), str, INET_ADDRSTRLEN);
+
+        clientAddr = std::string(strdup(str));
+
+        std::string s = "[clients] Client " + clientAddr +" connected";
+        out.out(0, s);
+        clientlist.push_back(ssl);
+        ssl = SSL_new(ctx);
+        SSL_set_fd(ssl, client);
+
+        //launch new thread to handle connection
+        std::thread nthread([this] { this->handleConnection(); });
+        nthread.detach();
+
+        SleepEx(250, false);
+    }
+
+    closesocket(sock);
+    SSL_CTX_free(ctx);
+    cleanup();
 }
 
 void clienthandler::stop()
@@ -15,17 +62,236 @@ void clienthandler::stop()
 
 }
 
+void clienthandler::init_ssl()
+{
+    SSL_load_error_strings();
+    OpenSSL_add_ssl_algorithms();
+}
+
+void clienthandler::cleanup()
+{
+    EVP_cleanup();
+}
+
+void clienthandler::configure_context(SSL_CTX* ctx)
+{
+    SSL_CTX_set_ecdh_auto(ctx, 1);
+
+    /* Set the key and cert */
+    if (SSL_CTX_use_certificate_file(ctx, "C:\\cert.pem", SSL_FILETYPE_PEM) <= 0) {
+        ERR_print_errors_fp(stderr);
+        exit(EXIT_FAILURE);
+    }
+
+    if (SSL_CTX_use_PrivateKey_file(ctx, "C:\\key.pem", SSL_FILETYPE_PEM) <= 0) {
+        ERR_print_errors_fp(stderr);
+        exit(EXIT_FAILURE);
+    }
+}
+
+SSL_CTX* clienthandler::create_context()
+{
+    const SSL_METHOD* method;
+    SSL_CTX* ctx;
+
+    method = SSLv23_server_method();
+
+    ctx = SSL_CTX_new(method);
+    if (!ctx) {
+        perror("Unable to create SSL context");
+        ERR_print_errors_fp(stderr);
+        exit(EXIT_FAILURE);
+    }
+
+    return ctx;
+}
+
+void clienthandler::handleConnection()
+{
+    std::string _clientAddr = clientAddr;
+    SSL* _ssl = ssl;
+    int _client = client;
+    try {
+        if (SSL_accept(ssl) <= 0) {
+            ERR_print_errors_fp(stderr);
+        }
+        for (;;)
+        {
+            char buf[1024];
+            int result = SSL_read(_ssl, buf, 1024);
+            std::string sr(buf);
+            if (result == -1)
+            {
+                out.out(0, "[clients] [" + _clientAddr + "] closed connection.");
+                SleepEx(1, false);
+                return;
+                //continue;
+            }
+
+            std::string sout = "[clients] [" + _clientAddr + "] Received: " + sr;
+            out.out(0, sout);
+            //F = first connect
+            //L = logging in
+            //U = client ping
+            //printf("\n%c\n", buf[0]);
+            if (buf[0] == 'F') //first connect will send simple 'F-*hwid*'
+            {
+                std::string hwid = db.explode(sr, '-')[1];
+                std::string s = "INSERT INTO connectionlog (addrinfo, hwidinfo) VALUES ('" + _clientAddr + "', '" + hwid + "');";
+                db.ExecuteNonQuery(s);
+
+                char* _reply = "F-ok";
+                std::string ts(_reply);
+                sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
+                out.out(0, sout);
+                SSL_write(_ssl, _reply, strlen(_reply));
+
+                //wait for login
+
+            }
+            else if (buf[0] == 'L')
+            {
+                std::string retStr = "";
+                //check user and update hwid if needed then start -U loop
+                std::string uname = db.explode(sr, '-')[1];
+                std::string pwd = db.explode(sr, '-')[2];
+                std::string hwid = db.explode(sr, '-')[3];
+                std::string ver = db.explode(sr, '-')[4];
+                //check if username and password exist together
+                if (db.doesUsernameExist(uname)) {
+                    if (db.checkPassword(uname, pwd))
+                    {
+                        std::string cHwid = db.getHwid(std::to_string(db.getUid(uname)));
+                        if (cHwid == "not_set")
+                        {
+                            db.setHwid(db.getUid(uname), hwid);
+                            cHwid = db.getHwid(std::to_string(db.getUid(uname)));
+                        }
+
+                        if (cHwid != hwid)
+                        {
+                            char* _reply = "L-Error-Wrong-HWID";
+                            std::string ts(_reply);
+                            sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
+                            out.out(0, sout);
+                            SSL_write(_ssl, _reply, strlen(_reply));
+
+                            time_t now = time(0);
+                            struct tm* ntm = gmtime(&now);
+                            std::string _time = std::to_string(ntm->tm_year + 1900) + "-" + std::to_string(ntm->tm_mon + 1) + "-" + std::to_string(ntm->tm_mday) + "-" + std::to_string(ntm->tm_hour) + "-" + std::to_string(ntm->tm_min) + "-" + std::to_string(ntm->tm_sec);
+
+                            db.lockAccount(db.getUid(uname), "User tried accessing software with incorrect HWID! { Old: " + cHwid + ", New: " + hwid + " } @ " + _time);
+                            continue;
+                        }
+                        ver = ver.substr(0, ver.length() - 1);
+                        if (ver != std::string(CurrentClientVersion))
+                        {
+                            char* _reply = "L-Error-Wrong-ver";
+                            std::string ts(_reply);
+                            sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
+                            out.out(0, sout);
+                            SSL_write(_ssl, _reply, strlen(_reply));
+                            continue;
+                        }
+
+                        char* _reply = "L-ok";
+                        std::string ts(_reply);
+                        sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
+                        out.out(0, sout);
+                        SSL_write(_ssl, _reply, strlen(_reply));
+
+                        //out.out(0, "[clients] connected users: " + std::to_string(ch.clientlist.size()));
+                        for (;; SleepEx(600000, false))
+                        {
+
+                        }
+                    }
+                    else
+                    {
+                        char* _reply = "L-Error-Wrong-PWD";
+                        std::string ts(_reply);
+                        sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
+                        out.out(0, sout);
+                        SSL_write(_ssl, _reply, strlen(_reply));
+                        continue;
+                    }
+                }
+                else {
+                    char* _reply = "L-Error-USERNAME-BAD";
+                    std::string ts(_reply);
+                    sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
+                    out.out(0, sout);
+                    SSL_write(_ssl, _reply, strlen(_reply));
+                    continue;
+                }
+            }
+        }
+    }
+    catch (...)
+    {
+        out.out(2, "[clients] there was an error with one of the clients, removing them from currently connected!");
+        for (size_t i = 0; i < clientlist.size(); i++)
+        {
+            if (clientlist[i] == _ssl)
+                clientlist.erase(clientlist.begin() + i);
+        }
+        SSL_shutdown(_ssl);
+        SSL_free(_ssl);
+        closesocket(_client);
+    }
+    SSL_shutdown(_ssl);
+    SSL_free(_ssl);
+    closesocket(_client);
+    //strcpy(_reply, reply);
+    //example write:
+    //SSL_write(_ssl, _reply, strlen(reply));
+    
+
+    // std::terminate();
+}
+
+int clienthandler::create_socket(int port)
+{
+    int s;
+    struct sockaddr_in addr;
+
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(port);
+    addr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+    s = socket(AF_INET, SOCK_STREAM, 0);
+    if (s < 0) {
+        perror("Unable to create socket");
+        exit(EXIT_FAILURE);
+    }
+
+    if (bind(s, (struct sockaddr*)&addr, sizeof(addr)) < 0) {
+        perror("Unable to bind");
+        exit(EXIT_FAILURE);
+    }
+
+    if (listen(s, 1) < 0) {
+        perror("Unable to listen");
+        exit(EXIT_FAILURE);
+    }
+
+    return s;
+}
+
+
+
 
 //Order checker
-
 orderchecker::orderchecker()
 {
 	start();
 };
+
 orderchecker::~orderchecker()
 {
 	stop();
 };
+
 int orderchecker::start()
 {
     klog out;
@@ -158,11 +424,16 @@ int orderchecker::start()
     } while (iResult > 0);
     return 1;
 }
+
 void orderchecker::stop()
 {
 
 }
 
+
+
+
+//Account checking
 accountchecker::accountchecker() {
 
 }

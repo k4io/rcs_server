@@ -250,7 +250,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\kai\source\repos\server\server\discordbot.cpp" />
     <ClInclude Include="C:\Users\kai\source\repos\server\server\discordbot.h" />
     <ClInclude Include="C:\Users\kai\source\repos\server\server\includes.h" />
-    <ClInclude Include="md5.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\kai\source\repos\server\server\buildvs19\ZERO_CHECK.vcxproj">

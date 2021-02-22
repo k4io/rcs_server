@@ -6,10 +6,24 @@
 
 class clienthandler {
 public:
+	std::vector<SSL*> clientlist;
+	klog out;
 	clienthandler();
 	~clienthandler();
 	void start();
 	void stop();
+	void init_ssl();
+	void cleanup();
+	void configure_context(SSL_CTX *ctx);
+	int create_socket(int port);
+	SSL_CTX* create_context();
+	void handleConnection();
+private:
+	manager db;
+	std::string clientAddr;
+	SSL* ssl;
+	int client;
+	char reply[1024];
 };
 
 class orderchecker
@@ -30,12 +44,6 @@ class accountchecker
 {
 public:
 	char* strptime(const char* s, const char* f, struct tm* tm) {
-		// Isn't the C++ standard lib nice? std::get_time is defined such that its
-		// format parameters are the exact same as strptime. Of course, we have to
-		// create a string stream first, and imbue it with the current C locale, and
-		// we also have to make sure we return the right things if it fails, or
-		// if it succeeds, but this is still far simpler an implementation than any
-		// of the versions in any of the C standard libraries.
 		std::istringstream input(s);
 		input.imbue(std::locale(setlocale(LC_ALL, nullptr)));
 		input >> std::get_time(tm, f);
