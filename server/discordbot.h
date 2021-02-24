@@ -7,7 +7,7 @@
 
 class discord : public SleepyDiscord::DiscordClient {
 public:
-	clienthandler ch;
+	//clienthandler ch;
 	int nb = 0;
 	std::string auth = "empty";
 	using SleepyDiscord::DiscordClient::DiscordClient;
@@ -27,7 +27,7 @@ public:
 				pplus++;
 
 
-			std::string _usStr = "Online: " + std::to_string(ch.clientlist.size()) + " | Premium+ Slots: " + std::to_string(pplus) + "/50";
+			std::string _usStr = "Users: " + std::to_string(useramount) + " | Premium+ Slots: " + std::to_string(pplus) + "/50";
 			updateStatus(_usStr, 0, SleepyDiscord::online, false);
 			
 			SleepEx(30000, false);
@@ -43,7 +43,7 @@ public:
 			for (auto a : _vss)
 				p++;
 
-			_usStr = "Online: " + std::to_string(ch.clientlist.size()) + " | Premium Slots: " + std::to_string(p) + "/50";
+			_usStr = "Users: " + std::to_string(useramount) + " | Premium Slots: " + std::to_string(p) + "/50";
 			updateStatus(_usStr, 0, SleepyDiscord::online, false);
 			SleepEx(30000, false);
 		}

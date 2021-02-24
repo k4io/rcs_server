@@ -28,7 +28,7 @@
 
 #pragma comment(lib, "ws2_32.lib")
 
-#define buffSize 1024
+#define BuffSize 1024
 
 #define DEFAULT_BUFLEN 128
 #define DEFAULT_ORDER_PORT "51001"
@@ -73,19 +73,19 @@ public:
 		switch (sl)
 		{
 		case 0:
-			//printf("\n[%s]	[info]: %s", _time.c_str(), msg.c_str());
+			//printf("[%s]	[info]: %s\n", _time.c_str(), msg.c_str());
 			std::cerr << "[" << _time.c_str() << "]  [info]: " << msg.c_str() << std::endl;
 			break;
 		case 1:
-			//printf("\n[%s]	[warning]: %s", _time.c_str(), msg.c_str());
+			//printf("[%s]	[warning]: %s\n", _time.c_str(), msg.c_str());
 			std::cerr << "[" << _time.c_str() << "]  [warning]: " << msg.c_str() << std::endl;
 			break;
 		case 2:
-			//printf("\n[%s]	[error]: %s", _time.c_str(), msg.c_str());
+			//printf("[%s]	[error]: %s\n", _time.c_str(), msg.c_str());
 			std::cerr << "[" << _time.c_str() << "]  [error]: " << msg.c_str() << std::endl;
 			break;
 		case 3:
-			//printf("\n[%s]	[fatal]: %s", _time.c_str(), msg.c_str());
+			//printf("[%s]	[fatal]: %s\n", _time.c_str(), msg.c_str());
 			std::cerr << "[" << _time.c_str() << "]  [fatal]: " << msg.c_str() << std::endl;
 			break;
 		}

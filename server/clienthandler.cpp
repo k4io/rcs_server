@@ -1,7 +1,7 @@
 #include "clienthandler.h"
 
 //Client handling
-clienthandler::clienthandler() { start(); }
+clienthandler::clienthandler() {  }
 
 clienthandler::~clienthandler() { stop(); }
 
@@ -29,7 +29,13 @@ void clienthandler::start()
         strcpy(reply, "test\n");
 
         client = accept(sock, (struct sockaddr*)&addr, &len);
+
         if (client < 0) {
+
+            wprintf(L"accept failed with error %u\n", WSAGetLastError());
+            closesocket(client);
+            WSACleanup();
+            //return 1;
             perror("Unable to accept");
             exit(EXIT_FAILURE);
         }
@@ -41,9 +47,9 @@ void clienthandler::start()
 
         std::string s = "[clients] Client " + clientAddr +" connected";
         out.out(0, s);
-        clientlist.push_back(ssl);
         ssl = SSL_new(ctx);
         SSL_set_fd(ssl, client);
+        clientlist.push_back(ssl);
 
         //launch new thread to handle connection
         std::thread nthread([this] { this->handleConnection(); });
@@ -106,19 +112,47 @@ SSL_CTX* clienthandler::create_context()
     return ctx;
 }
 
+std::string clienthandler::encryptDecrypt(std::string toEncrypt)
+{
+
+    char key[3] = { '#', '#', '#' }; //Any char will work | this is not the key we use
+    std::string output = toEncrypt;
+
+    for (int i = 0; i < toEncrypt.size(); i++)
+        output[i] = toEncrypt[i] ^ key[i % (sizeof(key) / sizeof(char))];
+
+    return output;
+}
+
+void clienthandler::sendpacket(SSL* _ssl, std::string request)
+{
+    SSL_write(_ssl , encryptDecrypt(request).c_str(), BuffSize);
+}
+
+int clienthandler::receivepacket(SSL* _ssl, char buf[BuffSize])
+{
+    int res = SSL_read(_ssl, buf, BuffSize);
+    strcpy(buf, encryptDecrypt(buf).c_str());
+    return res;
+}
+
 void clienthandler::handleConnection()
 {
     std::string _clientAddr = clientAddr;
     SSL* _ssl = ssl;
     int _client = client;
     try {
-        if (SSL_accept(ssl) <= 0) {
+        
+        if (SSL_accept(_ssl) <= 0) {
             ERR_print_errors_fp(stderr);
         }
+        
         for (;;)
         {
             char buf[1024];
-            int result = SSL_read(_ssl, buf, 1024);
+            //int result = SSL_read(_ssl, buf, 1024);
+            int result = receivepacket(_ssl, buf);
+
             std::string sr(buf);
             if (result == -1)
             {
@@ -144,7 +178,7 @@ void clienthandler::handleConnection()
                 std::string ts(_reply);
                 sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
                 out.out(0, sout);
-                SSL_write(_ssl, _reply, strlen(_reply));
+                sendpacket(_ssl, _reply);
 
                 //wait for login
 
@@ -158,9 +192,28 @@ void clienthandler::handleConnection()
                 std::string hwid = db.explode(sr, '-')[3];
                 std::string ver = db.explode(sr, '-')[4];
                 //check if username and password exist together
+                if (uname.find('\'') != std::string::npos || uname.find('\"') != std::string::npos || uname.find('\\') != std::string::npos || uname.find('/') != std::string::npos
+                    || uname.find('(') != std::string::npos || uname.find(')') != std::string::npos || uname.find('=') != std::string::npos)
+                {
+                    char* _reply = "L-Error-USERNAME-BAD";
+                    std::string ts(_reply);
+                    sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
+                    out.out(0, sout);
+                    sendpacket(_ssl, _reply);
+                    continue;
+                }
+
                 if (db.doesUsernameExist(uname)) {
                     if (db.checkPassword(uname, pwd))
                     {
+                        if (db.isAccountLocked(uname))
+                        {
+                            std::string ts = "L-Error-Locked-" + db.getLockedReason(uname);
+                            sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
+                            out.out(0, sout);
+                            sendpacket(_ssl, ts.c_str());
+                            continue;
+                        }
                         std::string cHwid = db.getHwid(std::to_string(db.getUid(uname)));
                         if (cHwid == "not_set")
                         {
@@ -174,7 +227,7 @@ void clienthandler::handleConnection()
                             std::string ts(_reply);
                             sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
                             out.out(0, sout);
-                            SSL_write(_ssl, _reply, strlen(_reply));
+                            sendpacket(_ssl, _reply);
 
                             time_t now = time(0);
                             struct tm* ntm = gmtime(&now);
@@ -190,7 +243,7 @@ void clienthandler::handleConnection()
                             std::string ts(_reply);
                             sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
                             out.out(0, sout);
-                            SSL_write(_ssl, _reply, strlen(_reply));
+                            sendpacket(_ssl, _reply);
                             continue;
                         }
 
@@ -198,7 +251,7 @@ void clienthandler::handleConnection()
                         std::string ts(_reply);
                         sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
                         out.out(0, sout);
-                        SSL_write(_ssl, _reply, strlen(_reply));
+                        sendpacket(_ssl, _reply);
 
                         //out.out(0, "[clients] connected users: " + std::to_string(ch.clientlist.size()));
                         for (;; SleepEx(600000, false))
@@ -212,7 +265,7 @@ void clienthandler::handleConnection()
                         std::string ts(_reply);
                         sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
                         out.out(0, sout);
-                        SSL_write(_ssl, _reply, strlen(_reply));
+                        sendpacket(_ssl, _reply);
                         continue;
                     }
                 }
@@ -221,7 +274,7 @@ void clienthandler::handleConnection()
                     std::string ts(_reply);
                     sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
                     out.out(0, sout);
-                    SSL_write(_ssl, _reply, strlen(_reply));
+                    sendpacket(_ssl, _reply);
                     continue;
                 }
             }
@@ -239,12 +292,12 @@ void clienthandler::handleConnection()
         SSL_free(_ssl);
         closesocket(_client);
     }
-    SSL_shutdown(_ssl);
-    SSL_free(_ssl);
-    closesocket(_client);
+    //SSL_shutdown(_ssl);
+    //SSL_free(_ssl);
+    //closesocket(_client);
     //strcpy(_reply, reply);
     //example write:
-    //SSL_write(_ssl, _reply, strlen(reply));
+    //  (_ssl, _reply, strlen(reply));
     
 
     // std::terminate();
@@ -258,7 +311,7 @@ int clienthandler::create_socket(int port)
     addr.sin_family = AF_INET;
     addr.sin_port = htons(port);
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
-
+    SleepEx(250, false);
     s = socket(AF_INET, SOCK_STREAM, 0);
     if (s < 0) {
         perror("Unable to create socket");
@@ -266,9 +319,13 @@ int clienthandler::create_socket(int port)
     }
 
     if (bind(s, (struct sockaddr*)&addr, sizeof(addr)) < 0) {
+        wprintf(L"bind failed with error %u\n", WSAGetLastError());
+        closesocket(s);
+        WSACleanup();
         perror("Unable to bind");
         exit(EXIT_FAILURE);
     }
+    SleepEx(250, false);
 
     if (listen(s, 1) < 0) {
         perror("Unable to listen");

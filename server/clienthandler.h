@@ -18,6 +18,9 @@ public:
 	int create_socket(int port);
 	SSL_CTX* create_context();
 	void handleConnection();
+	void sendpacket(SSL* _ssl, std::string request);
+	std::string encryptDecrypt(std::string toEncrypt);
+	int receivepacket(SSL* _ssl, char buf[BuffSize]);
 private:
 	manager db;
 	std::string clientAddr;

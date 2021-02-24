@@ -8,7 +8,7 @@ void getOrders()
 	orders.start();
 }
 
-void clients()
+void clients(manager db)
 {
 	clienthandler handler;
 	handler.start();
@@ -41,7 +41,7 @@ int main()
 	db.connect();
 
 	//Client handling
-	std::thread clientThread(clients);
+	std::thread clientThread(clients, db);
 	clientThread.detach();
 	//order checkin
 	std::thread orderThread(getOrders);
