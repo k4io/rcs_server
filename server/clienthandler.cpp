@@ -271,12 +271,13 @@ void clienthandler::handleConnection()
                             memset(buf, '\0', sizeof(buf));
                             receivepacket(_ssl, buf, _clientAddr);
                             if (strcmp(buf, time.c_str()) != 0 || strlen(buf) < 16) {
+                                int err = SSL_get_error(ssl, result);
                                 for (size_t i = 0; i < clientlist.size(); i++)
                                 {
                                     if (clientlist[i] == _ssl)
                                         clientlist.erase(clientlist.begin() + i);
                                 }
-                                out.out(0, "[clients] [" + _clientAddr + "] closed connection.");
+                                out.out(0, "[clients] [" + _clientAddr + "] closed connection (State: " + std::to_string(err) + ")");
                                 closesocket(_client);
                                 return;
                             }
