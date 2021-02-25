@@ -74,6 +74,7 @@ public:
 	std::string getAllPremiumPlus();
 	std::string getAllPremium();
 	void lockAccount(int uid, std::string lockReason);
+	std::string getTime();
 
 	std::vector<std::string> explode(const std::string& s, const char& c)
 	{

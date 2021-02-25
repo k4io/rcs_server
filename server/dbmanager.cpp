@@ -27,7 +27,7 @@ bool manager::connect()
 		return true;
 	}
 	catch (sql::SQLException& e) { 
-		out.out(3, "[mysql] Could not connect to database");
+		out.out(3, "[mysql] Could not connect to database # ERR " + string(e.what()) + " : Err code " + to_string(e.getErrorCode()) + ", SQLState: " + string(e.getSQLState()));
 		cout << "# ERR: SQLException in " << __FILE__;
 		cout << "(" << __FUNCTION__ << ") on line "
 			<< __LINE__ << endl;
@@ -61,6 +61,7 @@ std::string manager::ExecuteNonQuery(std::string query)
 		system("pause");
 		exit(-1);
 	}
+	SleepEx(100, 0);
 }
 
 std::string manager::ExecuteQuery(std::string query, std::string column)
@@ -92,6 +93,7 @@ std::string manager::ExecuteQuery(std::string query, std::string column)
 		system("pause");
 		exit(-1);
 	}
+	SleepEx(100, 0);
 }
 
 int manager::ExecuteQueryInt(std::string query, std::string column)
@@ -120,6 +122,7 @@ int manager::ExecuteQueryInt(std::string query, std::string column)
 		system("pause");
 		exit(-1);
 	}
+	SleepEx(100, 0);
 }
 
 Order manager::getOrder(std::string orderid)
@@ -544,4 +547,13 @@ std::string manager::hash(std::string str)
 
 void manager::lockAccount(int uid, std::string lockReason) {
 	ExecuteNonQuery("UPDATE users SET locked=1,lockedreason='" + lockReason + "' WHERE uid=" + std::to_string(uid) + ";");
+}
+
+std::string manager::getTime()
+{
+	time_t now = time(0);
+	struct tm* ntm = gmtime(&now);
+
+	std::string _time = std::to_string(ntm->tm_year + 1900) + "-" + std::to_string(ntm->tm_mon + 1) + "-" + std::to_string(ntm->tm_mday) + " " + std::to_string(ntm->tm_hour) + ":" + std::to_string(ntm->tm_min) + ":" + std::to_string(ntm->tm_sec);
+	return _time;
 }

@@ -49,6 +49,7 @@ void clienthandler::start()
         out.out(0, s);
         ssl = SSL_new(ctx);
         SSL_set_fd(ssl, client);
+
         clientlist.push_back(ssl);
 
         //launch new thread to handle connection
@@ -112,7 +113,7 @@ SSL_CTX* clienthandler::create_context()
     return ctx;
 }
 
-std::string clienthandler::encryptDecrypt(std::string toEncrypt)
+std::string clienthandler::encryptDecrypt(std::string toEncrypt) 
 {
 
     char key[3] = { '#', '#', '#' }; //Any char will work | this is not the key we use
@@ -124,15 +125,23 @@ std::string clienthandler::encryptDecrypt(std::string toEncrypt)
     return output;
 }
 
-void clienthandler::sendpacket(SSL* _ssl, std::string request)
+void clienthandler::sendpacket(SSL* _ssl, std::string request, std::string _clientAddr)
 {
+    std::string ts(request);
+    ts = "[clients] [" + _clientAddr + "] Sent: " + ts;
+    out.out(0, ts);
     SSL_write(_ssl , encryptDecrypt(request).c_str(), BuffSize);
+    SleepEx(150, 0);
 }
 
-int clienthandler::receivepacket(SSL* _ssl, char buf[BuffSize])
+int clienthandler::receivepacket(SSL* _ssl, char buf[BuffSize], std::string _clientAddr)
 {
     int res = SSL_read(_ssl, buf, BuffSize);
     strcpy(buf, encryptDecrypt(buf).c_str());
+    std::string ts(buf);
+    ts = "[clients] [" + _clientAddr + "] Received: " + ts;
+    out.out(0, ts);
+    SleepEx(150, 0);
     return res;
 }
 
@@ -141,29 +150,48 @@ void clienthandler::handleConnection()
     std::string _clientAddr = clientAddr;
     SSL* _ssl = ssl;
     int _client = client;
+
+    struct timeval timeout;
+    timeout.tv_sec = 10;
+    timeout.tv_usec = 0;
+    /*
+    if (setsockopt(_client, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout,
+        sizeof(timeout)) < 0)
+        perror("setsockopt failed\n");
+
+    if (setsockopt(_client, SOL_SOCKET, SO_SNDTIMEO, (char*)&timeout,
+        sizeof(timeout)) < 0)
+        perror("setsockopt failed\n");*/
     try {
         
         if (SSL_accept(_ssl) <= 0) {
             ERR_print_errors_fp(stderr);
         }
-        
+        SleepEx(100, 0);
         for (;;)
         {
             char buf[1024];
+            memset(buf, '\0', sizeof(buf));
             //int result = SSL_read(_ssl, buf, 1024);
-            int result = receivepacket(_ssl, buf);
+            int result = receivepacket(_ssl, buf, _clientAddr);
 
             std::string sr(buf);
-            if (result == -1)
+            if (sr.find('\x1a') != std::string::npos)
+                continue;
+            if (result <= 0)
             {
-                out.out(0, "[clients] [" + _clientAddr + "] closed connection.");
+                int err = SSL_get_error(ssl, result);
+
+                for (size_t i = 0; i < clientlist.size(); i++)
+                {
+                    if (clientlist[i] == _ssl)
+                        clientlist.erase(clientlist.begin() + i);
+                }
+                out.out(0, "[clients] [" + _clientAddr + "] closed connection (State: " + std::to_string(err) + ")");
+                closesocket(_client);
                 SleepEx(1, false);
                 return;
-                //continue;
             }
-
-            std::string sout = "[clients] [" + _clientAddr + "] Received: " + sr;
-            out.out(0, sout);
             //F = first connect
             //L = logging in
             //U = client ping
@@ -175,11 +203,7 @@ void clienthandler::handleConnection()
                 db.ExecuteNonQuery(s);
 
                 char* _reply = "F-ok";
-                std::string ts(_reply);
-                sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
-                out.out(0, sout);
-                sendpacket(_ssl, _reply);
-
+                sendpacket(_ssl, _reply, _clientAddr);
                 //wait for login
 
             }
@@ -196,10 +220,7 @@ void clienthandler::handleConnection()
                     || uname.find('(') != std::string::npos || uname.find(')') != std::string::npos || uname.find('=') != std::string::npos)
                 {
                     char* _reply = "L-Error-USERNAME-BAD";
-                    std::string ts(_reply);
-                    sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
-                    out.out(0, sout);
-                    sendpacket(_ssl, _reply);
+                    sendpacket(_ssl, _reply, _clientAddr);
                     continue;
                 }
 
@@ -209,9 +230,7 @@ void clienthandler::handleConnection()
                         if (db.isAccountLocked(uname))
                         {
                             std::string ts = "L-Error-Locked-" + db.getLockedReason(uname);
-                            sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
-                            out.out(0, sout);
-                            sendpacket(_ssl, ts.c_str());
+                            sendpacket(_ssl, ts.c_str(), _clientAddr);
                             continue;
                         }
                         std::string cHwid = db.getHwid(std::to_string(db.getUid(uname)));
@@ -224,10 +243,7 @@ void clienthandler::handleConnection()
                         if (cHwid != hwid)
                         {
                             char* _reply = "L-Error-Wrong-HWID";
-                            std::string ts(_reply);
-                            sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
-                            out.out(0, sout);
-                            sendpacket(_ssl, _reply);
+                            sendpacket(_ssl, _reply, _clientAddr);
 
                             time_t now = time(0);
                             struct tm* ntm = gmtime(&now);
@@ -236,45 +252,47 @@ void clienthandler::handleConnection()
                             db.lockAccount(db.getUid(uname), "User tried accessing software with incorrect HWID! { Old: " + cHwid + ", New: " + hwid + " } @ " + _time);
                             continue;
                         }
-                        ver = ver.substr(0, ver.length() - 1);
                         if (ver != std::string(CurrentClientVersion))
                         {
                             char* _reply = "L-Error-Wrong-ver";
-                            std::string ts(_reply);
-                            sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
-                            out.out(0, sout);
-                            sendpacket(_ssl, _reply);
+                            sendpacket(_ssl, _reply, _clientAddr);
                             continue;
                         }
 
                         char* _reply = "L-ok";
-                        std::string ts(_reply);
-                        sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
-                        out.out(0, sout);
-                        sendpacket(_ssl, _reply);
+                        sendpacket(_ssl, _reply, _clientAddr);
 
                         //out.out(0, "[clients] connected users: " + std::to_string(ch.clientlist.size()));
-                        for (;; SleepEx(600000, false))
+                        for (;;)
                         {
+                            std::string time = db.getTime();
+                            sendpacket(_ssl, time, _clientAddr);
 
+                            memset(buf, '\0', sizeof(buf));
+                            receivepacket(_ssl, buf, _clientAddr);
+                            if (strcmp(buf, time.c_str()) != 0 || strlen(buf) < 16) {
+                                for (size_t i = 0; i < clientlist.size(); i++)
+                                {
+                                    if (clientlist[i] == _ssl)
+                                        clientlist.erase(clientlist.begin() + i);
+                                }
+                                out.out(0, "[clients] [" + _clientAddr + "] closed connection.");
+                                closesocket(_client);
+                                return;
+                            }
+                            SleepEx(600000, false);
                         }
                     }
                     else
                     {
                         char* _reply = "L-Error-Wrong-PWD";
-                        std::string ts(_reply);
-                        sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
-                        out.out(0, sout);
-                        sendpacket(_ssl, _reply);
+                        sendpacket(_ssl, _reply, _clientAddr);
                         continue;
                     }
                 }
                 else {
                     char* _reply = "L-Error-USERNAME-BAD";
-                    std::string ts(_reply);
-                    sout = "[clients] [" + _clientAddr + "] Sent: " + ts;
-                    out.out(0, sout);
-                    sendpacket(_ssl, _reply);
+                    sendpacket(_ssl, _reply, _clientAddr);
                     continue;
                 }
             }

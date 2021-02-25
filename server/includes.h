@@ -92,6 +92,12 @@ public:
 	}
 };
 
+struct User
+{
+	SSL* _ssl;
+	std::string username;
+};
+
 struct Order
 {
 	std::string order_id;
